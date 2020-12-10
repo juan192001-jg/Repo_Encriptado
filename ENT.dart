@@ -1,7 +1,7 @@
 import 'dart:io';
 
 void main(List<String> args) {
-  //alfabeto
+  //valor numerico de los simbolos de escritura
   Map alfabeto = new Map();
   alfabeto = {
     'a': 1,
@@ -44,7 +44,7 @@ void main(List<String> args) {
     '9': 38
   };
 
-  //numero
+  //representacion simbolica de los numeros
   Map numeros = new Map();
   numeros = {
     0: ' ',
@@ -88,6 +88,7 @@ void main(List<String> args) {
     38: '9'
   };
   if (args[0] == 'e') {
+    //desplazamiento para el cifrado
     int clave;
     stdout.writeln('ingrese la clave con la que va a Encriptar');
     clave = int.parse(stdin.readLineSync());
