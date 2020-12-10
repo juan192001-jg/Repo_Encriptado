@@ -97,6 +97,7 @@ void main(List<String> args) {
       print(mensaje);
       List<String> mensajeArray = mensaje.split('');
       List<int> numeros_de_letras_array = new List<int>();
+      //convertir letras en numeros y almacenarlos en array
       mensajeArray.forEach((element) {
         var numeros_Letras = alfabeto[element];
         numeros_de_letras_array.add(numeros_Letras);
@@ -111,6 +112,7 @@ void main(List<String> args) {
         encriptado += letras_Numeros;
       });
       print(encriptado);
+      //crear archivo cifrado
       final fileName = 'd:/mensaje cifrado.txt';
       new File(fileName).writeAsString(encriptado).then((File file) {
         print('archivo creado');
@@ -126,6 +128,7 @@ void main(List<String> args) {
       print(mensaje2);
       List<String> letras_de_numeros_array = mensaje2.split('');
       List<int> numeros_de_letras_encriptadas_array = new List<int>();
+      //convertir letras en numeros
       letras_de_numeros_array.forEach((element) {
         var numeros_Letras = alfabeto[element];
         numeros_de_letras_encriptadas_array.add(numeros_Letras);
@@ -139,6 +142,7 @@ void main(List<String> args) {
         desencriptado += letras_Numeros;
       });
       print(desencriptado);
+      //crear archivo decifrado
       final fileName = 'd:/mensaje decifrado.txt';
       new File(fileName).writeAsString(desencriptado).then((File file) {
         print('archivo creado');
