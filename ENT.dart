@@ -1,7 +1,7 @@
 import 'dart:io';
 
 void main(List<String> args) {
-  //valor numerico de los simbolos de escritura
+  //valor numerico de los simbolos de la escritura
   Map alfabeto = new Map();
   alfabeto = {
     'a': 1,
@@ -44,7 +44,7 @@ void main(List<String> args) {
     '9': 38
   };
 
-  //representacion simbolica de los numeros
+  //valor simbolico de los numeros para cifrar
   Map numeros = new Map();
   numeros = {
     0: ' ',
@@ -87,17 +87,19 @@ void main(List<String> args) {
     37: '8',
     38: '9'
   };
+  //si desea sifrar el primer argumento de la terminal debe ser 'e'
   if (args[0] == 'e') {
-    //desplazamiento para el cifrado
+    //desplazamiento en el alfabeto
     int clave;
     stdout.writeln('ingrese la clave con la que va a Encriptar');
     clave = int.parse(stdin.readLineSync());
-    //  comparacion de texto entracte con texto local para cambiar valores
+    // capturar el contenido del documento en la variable string mensaje
     new File(args[1]).readAsString().then((String mensaje) {
       print(mensaje);
+      //convertir el string mensaje a vector
       List<String> mensajeArray = mensaje.split('');
       List<int> numeros_de_letras_array = new List<int>();
-      //convertir letras en numeros y almacenarlos en array
+      //convertir las letras en numeros
       mensajeArray.forEach((element) {
         var numeros_Letras = alfabeto[element];
         numeros_de_letras_array.add(numeros_Letras);
@@ -105,6 +107,7 @@ void main(List<String> args) {
       // operacion para encriptado y resultado de la encriptacion
       String encriptado = '';
       List letras_de_numeros_array = new List();
+      //convertir numeros en letras
       numeros_de_letras_array.forEach((x) {
         var numeros_Letras_formula = (x + clave) % 38;
         String letras_Numeros = numeros[numeros_Letras_formula];
@@ -112,23 +115,25 @@ void main(List<String> args) {
         encriptado += letras_Numeros;
       });
       print(encriptado);
-      //crear archivo cifrado
-      final fileName = 'd:/mensaje cifrado.txt';
+      //crear archivo de texto con mensaje cifrado
+      final fileName = args[2];
       new File(fileName).writeAsString(encriptado).then((File file) {
         print('archivo creado');
       });
     });
   } else if (args[0] == 'd') {
+    //si lo que desea es decifrar entonces 1 arg en la consola es d
     int clave;
     stdout.writeln('ingrese la clave para  Desencriptar');
     clave = int.parse(stdin.readLineSync());
-    // comparacio de texto entrate encriptado par remplarzar valores
+    // leer el mensaje cifrado desde archivo de texto
     String desencriptado = '';
     new File(args[1]).readAsString().then((String mensaje2) {
       print(mensaje2);
+      //pasar el mensaje en un array
       List<String> letras_de_numeros_array = mensaje2.split('');
       List<int> numeros_de_letras_encriptadas_array = new List<int>();
-      //convertir letras en numeros
+      //pasar letar a numeros
       letras_de_numeros_array.forEach((element) {
         var numeros_Letras = alfabeto[element];
         numeros_de_letras_encriptadas_array.add(numeros_Letras);
@@ -142,18 +147,15 @@ void main(List<String> args) {
         desencriptado += letras_Numeros;
       });
       print(desencriptado);
-      //crear archivo decifrado
-      final fileName = 'd:/mensaje decifrado.txt';
+      //crear archivo con mensaje decifrado
+      final fileName = args[2];
       new File(fileName).writeAsString(desencriptado).then((File file) {
         print('archivo creado');
       });
     });
   }
 }
-// ruta mensaje cifrado d:/mensaje cifrado.txt
-//dart .\ENT.dart e d:/mensaje.txt
-// dart .\ENT.dart e d:/mensaje.txt. d:/mensaje decifrado.txt;
-
-// ruta mensaje decifrado d:/mensaje decifrado.txt;
-// dart .\ENT.dart d d:/desencriptado.txt
-// dart .\ENT.dart d d:/mensaje.txt. d:/mensaje decifrado.txt;
+// encriptar
+//dart .\ENT.dart e d:/mensaje.txt d:/mensajeCifrado.txt
+// dessencriptar:
+// dart .\ENT.dart d d:/desencriptado.txt d:/mensajeDecifrado.txt
